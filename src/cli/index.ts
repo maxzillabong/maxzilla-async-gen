@@ -62,7 +62,7 @@ function validateEnumType(enumType: string): void {
 program
   .name('maxzilla-async-gen')
   .description('Generate TypeScript types from AsyncAPI v3 specifications')
-  .version('1.0.0');
+  .version('0.1.0');
 
 program
   .command('generate')

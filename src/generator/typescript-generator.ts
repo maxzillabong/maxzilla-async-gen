@@ -315,9 +315,26 @@ export class TypeScriptGenerator {
 
   private generateEnum(name: string, values: string[], isTopLevel: boolean): string {
     if (this.options.enumType === 'enum') {
+      // When nested (not top-level), generate the enum separately and return just the name
+      if (!isTopLevel) {
+        // Only generate if not already generated
+        if (!this.generatedTypes.has(name)) {
+          const parts: string[] = [];
+          parts.push(`export enum ${name} {`);
+          for (const value of values) {
+            const enumKey = this.toEnumKey(value);
+            parts.push(`  ${enumKey} = '${value}',`);
+          }
+          parts.push(`}`);
+          this.pendingInterfaces.push(parts.join('\n'));
+          this.generatedTypes.add(name);
+        }
+        return name;
+      }
+
+      // Top-level enum
       const parts: string[] = [];
-      const exportKeyword = isTopLevel ? 'export ' : '';
-      parts.push(`${exportKeyword}enum ${name} {`);
+      parts.push(`export enum ${name} {`);
       for (const value of values) {
         const enumKey = this.toEnumKey(value);
         parts.push(`  ${enumKey} = '${value}',`);

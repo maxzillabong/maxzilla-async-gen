@@ -1,6 +1,6 @@
 {
   "name": "maxzilla-async-gen",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "TypeScript type generator for AsyncAPI v3 specifications",
   "main": "dist/index.js",
   "type": "module",
