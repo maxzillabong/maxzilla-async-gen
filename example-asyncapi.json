@@ -1,0 +1,147 @@
+{
+  "asyncapi": "3.0.0",
+  "info": {
+    "title": "User Service API",
+    "version": "1.0.0",
+    "description": "Example AsyncAPI v3 specification for testing maxzilla-async-gen"
+  },
+  "channels": {
+    "user.created": {
+      "address": "user.created",
+      "messages": {
+        "UserCreated": {
+          "$ref": "#/components/messages/UserCreated"
+        }
+      }
+    },
+    "user.updated": {
+      "address": "user.updated",
+      "messages": {
+        "UserUpdated": {
+          "$ref": "#/components/messages/UserUpdated"
+        }
+      }
+    }
+  },
+  "operations": {
+    "onUserCreated": {
+      "action": "receive",
+      "channel": {
+        "$ref": "#/channels/user.created"
+      }
+    },
+    "publishUserUpdate": {
+      "action": "send",
+      "channel": {
+        "$ref": "#/channels/user.updated"
+      }
+    }
+  },
+  "components": {
+    "messages": {
+      "UserCreated": {
+        "description": "Event published when a new user is created",
+        "payload": {
+          "$ref": "#/components/schemas/User"
+        },
+        "headers": {
+          "$ref": "#/components/schemas/MessageHeaders"
+        }
+      },
+      "UserUpdated": {
+        "description": "Event published when a user is updated",
+        "payload": {
+          "$ref": "#/components/schemas/UserUpdate"
+        },
+        "headers": {
+          "$ref": "#/components/schemas/MessageHeaders"
+        }
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "description": "User entity",
+        "required": ["id", "email", "createdAt"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique user identifier"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "User first name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "User last name"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["admin", "user", "moderator"],
+            "description": "User role"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when user was created"
+          }
+        }
+      },
+      "UserUpdate": {
+        "type": "object",
+        "description": "User update payload",
+        "required": ["id", "updatedFields"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "User ID being updated"
+          },
+          "updatedFields": {
+            "type": "object",
+            "description": "Fields that were updated",
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": ["admin", "user", "moderator"]
+              }
+            }
+          }
+        }
+      },
+      "MessageHeaders": {
+        "type": "object",
+        "description": "Standard message headers",
+        "required": ["correlationId", "timestamp"],
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "description": "Unique identifier for message correlation"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Message timestamp"
+          },
+          "source": {
+            "type": "string",
+            "description": "Message source service"
+          }
+        }
+      }
+    }
+  }
+}

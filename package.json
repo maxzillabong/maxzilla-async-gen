@@ -1,0 +1,60 @@
+{
+  "name": "maxzilla-async-gen",
+  "version": "1.0.0",
+  "description": "TypeScript type generator for AsyncAPI v3 specifications",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "maxzilla-async-gen": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli/index.ts",
+    "prepublishOnly": "npm run build",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "release": "semantic-release"
+  },
+  "keywords": [
+    "asyncapi",
+    "typescript",
+    "code-generation",
+    "api",
+    "types",
+    "asyncapi-v3",
+    "type-generator"
+  ],
+  "author": "Maxzilla",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxzillabong/maxzilla-async-gen.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.1.0",
+    "@semantic-release/npm": "^11.0.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.6.2",
+    "jest": "^30.2.0",
+    "semantic-release": "^23.1.1",
+    "ts-jest": "^29.4.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@asyncapi/parser": "^3.4.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & Support
+    url: https://github.com/maxzillabong/maxzilla-async-gen/discussions
+    about: Please use GitHub Discussions for help or general questions.
